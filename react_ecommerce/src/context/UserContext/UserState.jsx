@@ -1,6 +1,6 @@
-import { createContext } from 'react'
+import { createContext ,useReducer} from 'react'
 import axios from "axios";
-import UserReducer from "./UserReducer";
+import UserReducer from './UserReducer'
 
 const token = JSON.parse(localStorage.getItem("token"));
 
@@ -26,6 +26,36 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
     }
     }
-};
+    const getUser = async () => {
+        const res = await axios.get(
+        API_URL + "/users/getUser",
+        );
+        console.log(res.data)
+        dispatch({
+            type: "GET_USER",
+            payload: res.data[0],
+        
+        })
+        
+        return res;
+        
+        };
+
+    return (
+
+        <UserContext.Provider
+        
+        value={{
+            token: state.token,
+            user: state.user,
+            login,
+            getUser,
+        }}
+        >
+        {children}
+        </UserContext.Provider>
+        );
+        };
+
 
 export const UserContext = createContext(initialState);
