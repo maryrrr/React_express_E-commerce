@@ -24,13 +24,20 @@ export const UserProvider = ({ children }) => {
     
     if (res.data) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
+         console.log(res.data.token)
     }
     }
+    const logout = () => {
+        localStorage.removeItem("token");
+        dispatch({ type: "LOGOUT" });
+      };
+    
+
     const getUser = async () => {
         const res = await axios.get(
         API_URL + "/users/getUser",
         );
-        console.log(res.data)
+         console.log(res.data)
         dispatch({
             type: "GET_USER",
             payload: res.data[0],
@@ -40,6 +47,23 @@ export const UserProvider = ({ children }) => {
         return res;
         
         };
+    
+
+        const newUser = async (userData) => {
+            const res = await axios.post(
+            API_URL + "/users/newUser",
+            userData
+            );
+            console.log(res.data)
+            dispatch({
+                type: "NEW_USER",
+                payload: res.data,
+            
+            })
+            
+            return res;
+            
+            };
 
     return (
 
@@ -50,6 +74,8 @@ export const UserProvider = ({ children }) => {
             user: state.user,
             login,
             getUser,
+            logout,
+            newUser,
         }}
         >
         {children}
@@ -59,3 +85,9 @@ export const UserProvider = ({ children }) => {
 
 
 export const UserContext = createContext(initialState);
+
+
+
+
+
+
