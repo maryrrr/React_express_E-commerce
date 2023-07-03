@@ -1,0 +1,18 @@
+.container {
+    &__profile {
+        background-color: rgb(122, 122, 98);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 3.5rem;
+    }
+    &__user{
+        background-color: aliceblue;
+        border: 2px solid rgb(24, 29, 34);
+        min-width:15rem;
+        height: 9rempx;
+        border-radius: 0.5rem; 
+        gap: 1rem;
+        
+    }
+}

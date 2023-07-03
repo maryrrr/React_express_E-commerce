@@ -6,16 +6,28 @@ const users = (state, action) => {
     return {
         ...state,
         token: action.payload.token,
-    };
-
+    }
     case "GET_USER":
         return {
             ...state,
-            user: action.payload,
+             user:action.payload,
 
-};
-    default:
-    return state;
-    }
     };
+    case "LOGOUT":
+        return {
+            ...state,
+            user: null,
+            token: null
+
+    };
+    case "NEW_USER":
+    return {
+        ...state,
+        user: action.payload,
+    }
+    default:
+        return state;
+}
+}
+
     export default users;
