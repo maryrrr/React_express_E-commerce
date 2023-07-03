@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
             type: "LOGIN",
             payload: res.data,
     });
-    
+    console.log(res.data.token);
     if (res.data) {
         localStorage.setItem("token", JSON.stringify(res.data.token));
          console.log(res.data.token)
@@ -31,16 +31,25 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("token");
         dispatch({ type: "LOGOUT" });
       };
+
     
 
     const getUser = async () => {
+        const token = JSON.parse(localStorage.getItem("token"));
         const res = await axios.get(
         API_URL + "/users/getUser",
-        );
-         console.log(res.data)
+        {
+         headers: {
+            authorization: token,
+        },
+    }
+    
+    
+        )
+        console.log(res.data);
         dispatch({
             type: "GET_USER",
-            payload: res.data[0],
+            payload: Array.isArray(res.data) ? res.data : [res.data],
         
         })
         

@@ -1,8 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react"
 import { UserContext } from "../../context/UserContext/UserState";
-import { useNavigate } from "react-router-dom";
-import './Login.scss'
-import { Form, Input, Button } from 'antd';
+import { useNavigate } from "react-router-dom"
+import { Form, Input, Button } from 'antd'
+import './Login.styles.scss'
 
 const Login = () => {
   const { login } = useContext(UserContext);
@@ -11,14 +11,14 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       await login(values);
-      navigate('/'); // Redirige a la página principal después del inicio de sesión exitoso
+      navigate('/')
     } catch (error) {
       console.error("Failed:", error);
     }
   };
 
   return (
-    <div className="container">
+    <div className="container__login">
       <h3>Login</h3>
       <Form
         name="basic"
@@ -43,7 +43,7 @@ const Login = () => {
           <Input.Password />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="container__button" style={{ background: "black" }}>
             Submit
           </Button>
         </Form.Item>

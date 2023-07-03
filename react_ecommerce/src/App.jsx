@@ -4,18 +4,22 @@ import { UserProvider } from './context/UserContext/UserState';
 import TheHeader from './components/TheHeader/TheHeader';
 import LoginApp from './views/LoginApp/LoginApp';
 import HomeApp from './views/HomeApp/HomeApp';
-import ProfileApp from './views/ProfileApp/ProfileApp';
+import ProfileApp from './views/ProfileApp/ProfileApp'
 import RegisterApp from './views/RegisterApp/RegisterApp';
 import { ProductsProvider } from './context/ProductsContext/ProductsState';
 import Products from './components/Products/Products';
+import Cart from './components/Cart/Cart';
+import Footer from './components/Footer/Footer'
+import { OrdersProvider } from './context/OrdersContext/Ordersstate';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <Router>
       <UserProvider>
         <ProductsProvider>
-          <Router>
+         <OrdersProvider>
             <TheHeader />
               <Routes>
                 <Route path="/" element={<HomeApp />} />
@@ -23,10 +27,13 @@ function App() {
                 <Route path="/register" element={<RegisterApp />} />
                 <Route path="/profile" element={<ProfileApp />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/cart" element={<Cart />} />
             </Routes>
-          </Router>
+          <Footer />
+          </OrdersProvider>
         </ProductsProvider>
       </UserProvider>
+    </Router>
     
 );
 }

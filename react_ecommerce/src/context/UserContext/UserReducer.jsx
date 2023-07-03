@@ -10,7 +10,7 @@ const users = (state, action) => {
     case "GET_USER":
         return {
             ...state,
-            user: action.payload,
+             user:action.payload,
 
     };
     case "LOGOUT":

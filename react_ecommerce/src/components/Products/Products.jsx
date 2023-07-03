@@ -1,26 +1,40 @@
 import React, { useContext, useEffect } from "react";
 import { ProductsContext } from "../../context/ProductsContext/ProductsState";
+import './Products.styles.scss'
+import { Card } from 'antd'
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const Products = () => {
-    const { getProducts, products } = useContext(ProductsContext);
+    const {getProducts, products,addCart,cart } = useContext(ProductsContext);
 
 useEffect(() => {
     getProducts();
 
 }, []);
 
-const product = products.map((product) => {
+useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
+
     return (
-        <div key={product.id}>
-            <span>{product.name} </span>
-            <span>{product.price.toFixed(2)}</span>
-            <span>{product.stock} </span>
+        <>
+        <section className="products__container" >
+            {products && products.map((product) => (
+                <div key={product.id}>
+            <Card className="products__card" >
+                <p >{product.name} </p>
+                <p>{product.price.toFixed(2)} €</p>
+                <p>{product.stock} </p>
+            <button  className="products__button" onClick={() => addCart(product)}><ShoppingCartOutlined />Add to cart</button>
+            
+        </Card>
         </div>
-        );
-    });
-
-return <div>{product}</div>;
-
-};
+            ))}
+        </section>
+        </>
+        )
+        
+    }
 
 export default Products
+

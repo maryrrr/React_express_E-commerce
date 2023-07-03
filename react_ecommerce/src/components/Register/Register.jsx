@@ -1,6 +1,7 @@
 import React,{ useContext }from 'react'
 import { UserContext } from "../../context/UserContext/UserState";
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd'
+import './Register.styles.scss'
 
 
 const Register = () => {
@@ -14,7 +15,8 @@ const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
 }
   return (
-    <>
+    
+    <div className="container__register">
     <h3>Register</h3>
     <Form
         name="basic"
@@ -48,12 +50,13 @@ const onFinishFailed = (errorInfo) => {
       
             </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" style={{ background: "black" }}>
                         Submit
                     </Button>
                     </Form.Item>
                     </Form>
-                    </>
+                    </div>
+                    
                     );
                 }
 
